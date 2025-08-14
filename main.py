@@ -15,13 +15,20 @@ logging.basicConfig(level=logging.INFO)
 DISCORD_BOT_TOKEN = os.environ.get('DISCORD_BOT_TOKEN')
 SPREADSHEET_NAME = os.environ.get('SPREADSHEET_NAME', '日報') # 環境変数がなければ'日報'を使う
 
-# --- Google認証情報の読み込み（修正箇所） ---
+# --- Google認証情報の読み込み（デバッグ用に修正） ---
 try:
     # 環境変数からJSON文字列を読み込む
     gcp_sa_key_str = os.environ.get('GCP_SA_KEY')
     if not gcp_sa_key_str:
         raise ValueError("環境変数 'GCP_SA_KEY' が設定されていません。")
     
+    # ★★★デバッグ用のコード★★★
+    # 受け取った秘密情報の中身をログに表示して確認する
+    print("--- RECEIVED SECRET ---")
+    print(gcp_sa_key_str)
+    print("--- END OF SECRET ---")
+    # ★★★ここまで★★★
+
     # JSON文字列を辞書オブジェクトに変換
     gcp_json_credentials_dict = json.loads(gcp_sa_key_str)
 
